@@ -53,7 +53,7 @@ def webServer(port=13331):
         #Fill in start - send your html file contents #Fill in end 
 
         connectionSocket.send(outputdata[i])
-	connectionSocket.send("\r\n")
+      connectionSocket.send("\r\n")
         
       connectionSocket.close() #closing the connection socket
       
@@ -76,4 +76,6 @@ def webServer(port=13331):
   #sys.exit()  # Terminate the program after sending the corresponding data
 
 if __name__ == "__main__":
+  webServer(13331)
+
   webServer(13331)
