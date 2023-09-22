@@ -20,7 +20,8 @@ def webServer(port=13331):
     
     print('Ready to serve...')
     connectionSocket, addr = serverSocket.accept() #Fill in start -are you accepting connections?     #Fill in end
-    
+    print('Connected from', addr)
+
     try:
       message = connectionSocket.recv(1024) #Fill in start -a client is sending you a message   #Fill in end 
       print('Message', message)
@@ -29,7 +30,7 @@ def webServer(port=13331):
       
       #opens the client requested file. 
       #Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
-      f = open(filename[1:]) #fill in start #fill in end)
+      f = open(filename[1:], "rb") #fill in start #fill in end)
       outputdata = f.read()
       
       #fill in end
@@ -38,8 +39,7 @@ def webServer(port=13331):
       
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
       header = "HTTP/1.1 200 OK\r\n"
-      header += "Content length: " + str(len(outputdata)) + "\r\n"
-      header += "\r\n"
+      connectionSocket.send(header.encode())
       #Fill in end
                
       for i in f: #for line in file
@@ -74,4 +74,3 @@ def webServer(port=13331):
 
 if __name__ == "__main__":
   webServer(13331)
-
