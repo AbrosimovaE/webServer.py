@@ -35,25 +35,20 @@ def webServer(port=13331):
       #fill in end
       
       outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
-      #Fill in start -This variable can store your headers you want to send for any valid or invalid request. 
-      #Content-Type above is an example on how to send a header as bytes. There are more!
-      #Fill in end
-      for i in range(0, len(outputdata)):
-        connectionSocket.send(outputdata[i])
-        connectionSocket.send("\r\n")
-      #Send an HTTP header line into socket for a valid request. What header should be sent for a response that is ok? 
+      
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
-      #Fill in start
       connectionSocket.send("HTTP/1.1 200 OK\r\n\r\n")
       #Fill in end
                
-
-      #Send the content of the requested file to the client
       for i in f: #for line in file
-        #Fill in start - send your html file contents #Fill in end 
-
+      #Fill in start - append your html file contents #Fill in end 
         connectionSocket.send(outputdata[i])
-      connectionSocket.send("\r\n")
+		    connectionSocket.send("\r\n")
+      #Send the content of the requested file to the client (don't forget the headers you created)!
+      # Fill in start
+
+
+      # Fill in end
         
       connectionSocket.close() #closing the connection socket
       
