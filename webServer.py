@@ -35,34 +35,29 @@ def webServer(port=13331):
       #fill in end
       
       outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
-      #Fill in start -This variable can store your headers you want to send for any valid or invalid request. 
-      #Content-Type above is an example on how to send a header as bytes. There are more!
-      #Fill in end
-      for i in range(0, len(outputdata)):
-        connectionSocket.send(outputdata[i])
-        connectionSocket.send("\r\n")
-      #Send an HTTP header line into socket for a valid request. What header should be sent for a response that is ok? 
+      
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
-      #Fill in start
-      connectionSocket.send("HTTP/1.1 200 OK\r\n\r\n")
+      header = "HTTP/1.1 200 OK\r\n"
       #Fill in end
                
-
-      #Send the content of the requested file to the client
       for i in f: #for line in file
-        #Fill in start - send your html file contents #Fill in end 
+      #Fill in start - append your html file contents #Fill in end 
+        connectionSocket.send(header.encode())
+      connectionSocket.send(outputdata)
+      #Send the content of the requested file to the client (don't forget the headers you created)!
+      # Fill in start
 
-        connectionSocket.send(outputdata[i])
-      connectionSocket.send("\r\n")
+
+      # Fill in end
         
       connectionSocket.close() #closing the connection socket
       
     except Exception as e:
       # Send response message for invalid request due to the file not being found (404)
-      connectionSocket.send('404 Not Found')
+      header = "HTTP/1.1 404 Not Found\r\n\r\n"
       # Remember the format you used in the try: block!
       #Fill in start
-      connectionSocket.send("<html><head></head><body><h1>404 Not found</h1></body></html>\r\n")
+      response = "<html><head></head><body><h1>404 Not Found</h1></body></html>"
       #Fill in end
 
 
@@ -78,4 +73,3 @@ def webServer(port=13331):
 if __name__ == "__main__":
   webServer(13331)
 
-  webServer(13331)
