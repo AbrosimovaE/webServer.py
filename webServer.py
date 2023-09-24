@@ -34,6 +34,7 @@ def webServer(port=13331):
             # fill in end
 
             outputdata = b"HTTP/1.1 200 OK\r\n"
+             outputdata += b"Server: \r\n"
             outputdata += b"Connection: close\r\n"  # Adding Connection header
             outputdata += b"Content-Type: text/html; charset=UTF-8\r\n\r\n"
 
